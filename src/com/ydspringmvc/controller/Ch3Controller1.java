@@ -48,7 +48,8 @@ public class Ch3Controller1 {
 		mv.setViewName("hello");
 		return mv;
 	}
-	@RequestMapping(value="/f**")
+	//“/**”实现多个级别路径的映射
+	@RequestMapping(value="/f/**")//ch3/f/a/b
 	public ModelAndView mapf(){
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("name","/ch31f");
