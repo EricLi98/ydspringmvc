@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- 配置MVC框架使用的各个 组件 -->
+	<!--HandlerMapping,它的作用是根据URL定位一个Controller  -->
+	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+	<!--HandlerAdapter, 它的作用是 调用Handler(控制器)的功能 -->
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+	<!-- ViewResolver,视图的解析器，它负责查找视图 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    	<property name="prefix" value="/WEB-INF/jsp/"/><!-- 从哪个目录下查找JSP -->
+  		<property name="suffix" value=".jsp"/><!-- 文件后缀 -->
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+	
+	<!--Controller,控制器(开发人员定制的)，一个项目可以包含很多，负责接收用户请求，然后调用业务逻辑，再将结果传给View   -->
+	<bean class="com.ydspringmvc.controller.HelloController" name="/hello"></bean>
+	<bean class="com.ydspringmvc.controller.Ch3Controller1"></bean>
+</beans>
