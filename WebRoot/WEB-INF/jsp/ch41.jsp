@@ -8,7 +8,7 @@
 </head>
 <body>
 	${error }
-	<form action="/ydspringmvc/ch33/req" method="post">
+	<form action="/ydspringmvc/ch41/map1" method="post">
 		userName:<input type="text" name="userName" value="${user.userName }"/><br/>
 		password:<input type="password" name="password"/><br/>
 		address:<input type="text" name="address" value="${user.address }"/><br/>

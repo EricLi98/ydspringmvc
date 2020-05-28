@@ -1,16 +1,24 @@
 package com.ydspringmvc.controller;
 
+import java.io.Writer;
 import java.util.ArrayList;
-
+import java.util.List;
+//import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ydspringmvc.entity.Department;
 import com.ydspringmvc.entity.UserBean;
 
 @Controller
@@ -102,6 +110,64 @@ public class Ch3Controller3 {
 			
 			return view;
 		}
+	@RequestMapping(value="/maph")
+	public void maph(HttpServletResponse response) throws Exception{
+		Writer out=response.getWriter();
+		out.write("/maph");
+		
+	}
 	
-
+	@RequestMapping(value="/mapi",method=RequestMethod.POST)
+	public String mapi(@ModelAttribute("user")UserBean userBean) {
+		
+		return "success";
+	}
+	
+	@RequestMapping(value="/mapi",method=RequestMethod.GET)
+	public String mapi() {
+		
+		return "mapi";
+	}
+	
+	//在功能方法执行之前，controller会先执行带有@ModelAttribute注解的方法，将其返回值放在Model中，供view来使用
+	@ModelAttribute("province")
+	public List<String> getProvince(){
+		ArrayList<String> arr=new ArrayList();
+		arr.add("shandong");
+		arr.add("henan");
+		return arr;
+	}
+	//@Value可以给参数进行赋值，可以是普通的字符串；也可以执行SPEL
+	@RequestMapping(value="/mapj",method=RequestMethod.GET)
+	public String mapj(@Value("abc")String name,Model model){
+		model.addAttribute("name",name);
+		return "hello";
+	}
+	
+	//@Value可以给参数进行赋值，可以是普通的字符串；也可以执行SPEL(放在“#{}”之内)
+	@RequestMapping(value="/mapk",method=RequestMethod.GET)
+	public String mapk(@Value("#{testBean.name}")String name,Model model){
+		model.addAttribute("name",name);
+		return "hello";
+	}
+	
+	
+	@RequestMapping(value="/mapm",method=RequestMethod.GET)
+	public String mapm(){
+		return "mapm";
+	}
+	@RequestMapping(value="/mapm",method=RequestMethod.POST)
+	public String mapm(@ModelAttribute("user")UserBean userBean,@ModelAttribute("dept")Department dept){
+		return "hello";
+	}
+	//@InitBinder注解的方法，在功能处理方法的绑定之前进行调用
+	@InitBinder(value="user")
+	public void initBinderUser(WebDataBinder binder){
+		binder.setFieldDefaultPrefix("u.");
+	}
+	//@InitBinder注解的方法，在功能处理方法的绑定之前进行调用
+	@InitBinder(value="dept")
+	public void initBinderDept(WebDataBinder binder){
+		binder.setFieldDefaultPrefix("d.");
+	}
 }

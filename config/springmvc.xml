@@ -11,6 +11,8 @@
 	<context:component-scan base-package="com.ydspringmvc.controller"></context:component-scan>
 	<!-- 支持MVC注解 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	
 	<!-- 配置MVC框架使用的各个 组件 -->
 	<!-- ViewResolver,视图的解析器，它负责查找视图 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -18,6 +20,8 @@
     	<property name="prefix" value="/WEB-INF/jsp/"/><!-- 从哪个目录下查找JSP -->
   		<property name="suffix" value=".jsp"/><!-- 文件后缀 -->
 	</bean>
+	<mvc:default-servlet-handler/>
+	<mvc:resources location="/WEB-INF/static/" mapping="/static/**"/>
 	
 	
 </beans>

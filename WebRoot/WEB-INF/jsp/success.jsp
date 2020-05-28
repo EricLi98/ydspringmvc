@@ -10,5 +10,7 @@
 username:${user.userName }<BR/>
 
 address:${user.address }
+
+dept.id:${user.dept.id }
 </body>
 </html>
