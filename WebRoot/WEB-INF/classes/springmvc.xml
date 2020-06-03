@@ -10,11 +10,16 @@
 	<!-- 开启自动扫描模式，查找Controller等组件 -->
 	<context:component-scan base-package="com.ydspringmvc.controller"></context:component-scan>
 	<!-- 支持MVC注解 -->
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 	
 	
 	<!-- 配置MVC框架使用的各个 组件 -->
 	<!-- ViewResolver,视图的解析器，它负责查找视图 -->
+	<bean class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="location">
+			<value>classpath:spring-view.xml</value>
+		</property>
+	</bean>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
     	<property name="prefix" value="/WEB-INF/jsp/"/><!-- 从哪个目录下查找JSP -->
@@ -22,6 +27,12 @@
 	</bean>
 	<mvc:default-servlet-handler/>
 	<mvc:resources location="/WEB-INF/static/" mapping="/static/**"/>
-	
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+		<list>
+			<bean class="com.ydspringmvc.util.TelConverter"></bean>
+		</list>
+		</property>
+	</bean>
 	
 </beans>
