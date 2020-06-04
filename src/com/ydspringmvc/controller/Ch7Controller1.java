@@ -5,9 +5,12 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.ydspringmvc.entity.UserBean;
 
 @Controller
@@ -27,6 +30,25 @@ public class Ch7Controller1 {
 			return "success";
 		}
 		return "ch71";
+	}
+	
+	@RequestMapping(value="/map2",method=RequestMethod.GET)
+	public String map2(){
+		String a=null;
+		String[] b={"a","b"};
+		int c=0;
+		//c=3/c;
+		b[2]="c";
+		a.equals("1");
+		return "ch71";
+	}
+	
+	@ExceptionHandler(value={NullPointerException.class,ArrayIndexOutOfBoundsException.class})
+	public ModelAndView exeception(Exception ex){
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("ex",ex);
+		mv.setViewName("error");
+		return mv;
 	}
 
 }
