@@ -7,6 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<%
+System.out.println("--ch81.jsp--");
+ %>
 <body>
 <form:form commandName="user" method="post">
 	<form:checkbox path="grant" label="grant?"/><BR/>

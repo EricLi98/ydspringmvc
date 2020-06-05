@@ -18,6 +18,7 @@ import com.ydspringmvc.entity.UserBean;
 public class Ch8Controller {
 	@RequestMapping(value="/map1",method=RequestMethod.GET)
 	public String map1(@ModelAttribute("user") UserBean userBean){
+		System.out.println("--Ch8Controller map1--");
 		return "ch81";
 	}
 	
